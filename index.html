@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desarrollador Backend & APIs RESTful | Python & FastAPI</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #10b981;
+            --accent-hover: #059669;
+            --border: #334155;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header / Hero */
+        header {
+            padding: 80px 0 60px;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--accent);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        h1 {
+            font-size: 2.6rem;
+            line-height: 1.2;
+            margin-bottom: 18px;
+        }
+
+        .hero-sub {
+            color: var(--text-muted);
+            font-size: 1.15rem;
+            max-width: 650px;
+            margin: 0 auto 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: #064e3b;
+            font-weight: 700;
+            padding: 12px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-hover);
+            color: #fff;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--border);
+            margin-left: 10px;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent);
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        /* Secciones */
+        section {
+            padding: 60px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .section-desc {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+        }
+
+        /* Grid de Proyectos */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .tag {
+            background: var(--bg-color);
+            color: var(--text-muted);
+            font-size: 0.78rem;
+            padding: 4px 10px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+        }
+
+        .card-links a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-right: 15px;
+        }
+
+        .card-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Paquete de Servicio */
+        .package-box {
+            background: var(--card-bg);
+            border: 2px solid var(--accent);
+            border-radius: 14px;
+            padding: 35px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .package-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+
+        .price {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--accent);
+        }
+
+        .checklist {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .checklist li {
+            margin-bottom: 12px;
+            padding-left: 26px;
+            position: relative;
+        }
+
+        .checklist li::before {
+            content: "✓";
+            color: var(--accent);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            .btn-outline { margin-left: 0; margin-top: 10px; display: block; }
+            .btn { display: block; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PORTADA -->
+    <header>
+        <div class="container">
+            <span class="badge">Disponible para proyectos Freelance</span>
+            <h1>Desarrollo Backend & APIs RESTful con Python y FastAPI</h1>
+            <p class="hero-sub">
+                Construyo arquitecturas backend rápidas, seguras y listas para producción. 
+                Transformo los requerimientos de tu negocio en APIs escalables con validación automática y documentación interactiva.
+            </p>
+            <div>
+                <a href="#contacto" class="btn">Solicitar Cotización</a>
+                <a href="#proyectos" class="btn btn-outline">Ver Demos en Vivo</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- PROYECTOS DEMO -->
+    <section id="proyectos">
+        <div class="container">
+            <h2>Proyectos & Demos Funcionales</h2>
+            <p class="section-desc">Ejemplos reales de sistemas backend desarrollados bajo estándares profesionales.</p>
+            
+            <div class="grid">
+                <!-- Proyecto 1 -->
+                <div class="card">
+                    <div>
+                        <h3>API Clínica Veterinaria</h3>
+                        <p>Sistema completo para agendar, consultar y cancelar citas médicas con persistencia de datos y manejo de errores HTTP estándar.</p>
+                        <div class="tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">FastAPI</span>
+                            <span class="tag">SQLAlchemy</span>
+                            <span class="tag">SQLite</span>
+                        </div>
+                    </div>
+                    <div class="card-links">
+                        <a href="TU_ENLACE_DE_SWAGGER_AQUI" target="_blank">Probar API (/docs) →</a>
+                        <a href="TU_ENLACE_GITHUB_AQUI" target="_blank">Código Fuente</a>
+                    </div>
+                </div>
+
+                <!-- Proyecto 2 -->
+                <div class="card">
+                    <div>
+                        <h3>API Gestor de Tareas</h3>
+                        <p>Backend de productividad con operaciones CRUD completas (incluyendo actualización de estados y prioridades) y validación estricta de esquemas.</p>
+                        <div class="tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">FastAPI</span>
+                            <span class="tag">Pydantic</span>
+                            <span class="tag">RESTful</span>
+                        </div>
+                    </div>
+                    <div class="card-links">
+                        <a href="TU_ENLACE_DE_SWAGGER_AQUI" target="_blank">Probar API (/docs) →</a>
+                        <a href="TU_ENLACE_GITHUB_AQUI" target="_blank">Código Fuente</a>
+                    </div>
+                </div>
+
+                <!-- Proyecto 3 -->
+                <div class="card">
+                    <div>
+                        <h3>API Catálogo de Productos</h3>
+                        <p>Microservicio enfocado en inventario para e-commerce o MVPs, diseñado con arquitectura modular y respuestas JSON optimizadas.</p>
+                        <div class="tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">FastAPI</span>
+                            <span class="tag">OpenAPI</span>
+                            <span class="tag">Uvicorn</span>
+                        </div>
+                    </div>
+                    <div class="card-links">
+                        <a href="TU_ENLACE_DE_SWAGGER_AQUI" target="_blank">Probar API (/docs) →</a>
+                        <a href="TU_ENLACE_GITHUB_AQUI" target="_blank">Código Fuente</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PAQUETE DE SERVICIO -->
+    <section id="servicios">
+        <div class="container">
+            <h2>Paquete Básico de Desarrollo</h2>
+            <p class="section-desc">Ideal para MVPs, aplicaciones móviles, landing pages dinámicas o automatizaciones.</p>
+
+            <div class="package-box">
+                <div class="package-header">
+                    <div>
+                        <h3>API RESTful Completa</h3>
+                        <span style="color: var(--text-muted); font-size: 0.9rem;">Entrega estructurada y lista para usar</span>
+                    </div>
+                    <div class="price">$400 <span style="font-size: 1rem; font-weight: normal;">USD</span></div>
+                </div>
+
+                <ul class="checklist">
+                    <li>Arquitectura modular en Python con FastAPI</li>
+                    <li>Endpoints CRUD completos (Crear, Leer, Actualizar, Borrar)</li>
+                    <li>Validación automática de datos de entrada con Pydantic</li>
+                    <li>Base de datos relacional integrada (SQLite / PostgreSQL)</li>
+                    <li>Documentación interactiva automática (Swagger UI)</li>
+                    <li>Despliegue en servidor en la nube y entrega de código fuente</li>
+                </ul>
+
+                <a href="#contacto" class="btn" style="width: 100%; text-align: center;">Iniciar Proyecto</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto" style="border-bottom: none;">
+        <div class="container" style="text-align: center;">
+            <h2>¿Listo para construir tu Backend?</h2>
+            <p class="section-desc">Escríbeme con los detalles de tu idea y te ayudo a estructurarla.</p>
+            <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+                <a href="https://t.me/TatoPokker" target="_blank" class="btn">Contactar por Telegram</a>
+                <a href="mailto:jolivergallardo@gmail.com" class="btn btn-outline">Enviar Correo</a>
+                <a href="https://github.com/TatoHack" target="_blank" class="btn btn-outline">GitHub</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>© 2026 — Desarrollador Backend Python & FastAPI. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
